@@ -1,7 +1,5 @@
 import FloatingHearts from "@/components/FloatingHearts";
-import HeroSection from "@/components/HeroSection";
-import LoveLetterSection from "@/components/LoveLetterSection";
-import ValentineQuestion from "@/components/ValentineQuestion";
+import ValentineProposal from "@/components/ValentineProposal";
 import { Heart } from "lucide-react";
 
 const Index = () => {
@@ -9,10 +7,9 @@ const Index = () => {
     <div className="min-h-screen romantic-gradient relative overflow-hidden">
       <FloatingHearts />
       
-      <main className="relative z-10">
-        <HeroSection />
-        <LoveLetterSection />
-        <ValentineQuestion />
+      <main className="relative z-10 pt-12">
+        {/* Main Proposal Section */}
+        <ValentineProposal />
         
         {/* Footer */}
         <footer className="py-12 text-center">

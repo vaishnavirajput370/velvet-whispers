@@ -56,6 +56,9 @@ export default {
         "soft-pink": "hsl(var(--soft-pink))",
         "warm-cream": "hsl(var(--warm-cream))",
         gold: "hsl(var(--gold))",
+        "deep-rose": "hsl(var(--deep-rose))",
+        "letter-bg": "hsl(var(--letter-bg))",
+        "letter-text": "hsl(var(--letter-text))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
