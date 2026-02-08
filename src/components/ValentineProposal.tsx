@@ -2,15 +2,21 @@ import { useState, useRef, useCallback } from "react";
 import { Heart } from "lucide-react";
 import doodleProposal from "@/assets/doodle-proposal.png";
 import doodleCelebration from "@/assets/doodle-celebration.png";
-import LoveEnvelope from "./LoveEnvelope";
+import ConfessionSection from "./ConfessionSection";
+import ScanningAnimation from "./ScanningAnimation";
+import ResultSticker from "./ResultSticker";
+import NoteSection from "./NoteSection";
+import CatchHeartsGame from "./CatchHeartsGame";
+
+type Stage = 'proposal' | 'celebration' | 'confession' | 'scanning' | 'result' | 'note' | 'game';
 
 const ValentineProposal = () => {
-  const [answered, setAnswered] = useState(false);
+  const [stage, setStage] = useState<Stage>('proposal');
   const [noButtonPosition, setNoButtonPosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleYes = () => {
-    setAnswered(true);
+    setStage('celebration');
   };
 
   const moveNoButton = useCallback(() => {
@@ -23,7 +29,7 @@ const ValentineProposal = () => {
     
     // Calculate random position within container bounds
     const maxX = container.width - buttonWidth - padding * 2;
-    const maxY = 150; // Keep within reasonable vertical range
+    const maxY = 150;
     
     const newX = Math.random() * maxX - maxX / 2;
     const newY = Math.random() * maxY - maxY / 2;
@@ -32,27 +38,35 @@ const ValentineProposal = () => {
   }, []);
 
   return (
-    <section className="py-16 px-6 relative min-h-[600px]">
+    <section className="py-8 px-6 relative min-h-[600px]">
       <div className="max-w-lg mx-auto text-center" ref={containerRef}>
-        {!answered ? (
-          <div className="fade-in space-y-8">
+        {/* Proposal Stage */}
+        {stage === 'proposal' && (
+          <div className="fade-in space-y-6">
             {/* Doodle Proposal Illustration */}
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center mb-6">
               <img 
                 src={doodleProposal} 
                 alt="Cute proposal doodle" 
-                className="w-48 h-48 object-contain doodle-bounce"
+                className="w-44 h-44 object-contain doodle-bounce"
               />
             </div>
 
-            <Heart className="w-8 h-8 text-rose mx-auto fill-rose/30 pulse-gentle" />
+            {/* Intro text */}
+            <p className="text-lg md:text-xl text-foreground/80 font-light">
+              Hey, on this special day, I made something for you.
+            </p>
+
+            <Heart className="w-6 h-6 text-rose mx-auto fill-rose/30 pulse-gentle" />
             
-            <div className="space-y-3">
-              <h2 className="text-4xl md:text-5xl font-romantic text-primary">
+            {/* Main proposal question */}
+            <div className="space-y-2">
+              <h2 className="text-4xl md:text-5xl font-romantic text-deep-rose">
                 Will you be my Valentine??
               </h2>
             </div>
             
+            {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6 min-h-[120px] relative">
               <button
                 onClick={handleYes}
@@ -80,26 +94,58 @@ const ValentineProposal = () => {
               (Hint: The NO button is shy... 🙈)
             </p>
           </div>
-        ) : (
-          <div className="fade-in space-y-8">
-            {/* Celebration Doodle */}
-            <div className="flex justify-center mb-6">
+        )}
+
+        {/* Celebration Stage */}
+        {stage === 'celebration' && (
+          <div className="fade-in space-y-6">
+            <div className="flex justify-center mb-4">
               <img 
                 src={doodleCelebration} 
                 alt="Celebration doodle" 
-                className="w-56 h-56 object-contain doodle-bounce"
+                className="w-48 h-48 object-contain doodle-bounce"
               />
             </div>
 
-            <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-romantic text-primary">
-                Yeh! Officially you are my Valentine! 💖
-              </h2>
+            <h2 className="text-3xl md:text-4xl font-romantic text-primary">
+              Yeh! Officially you are my Valentine! 💖
+            </h2>
+
+            <div className="pt-4">
+              <button
+                onClick={() => setStage('confession')}
+                className="px-8 py-3 bg-secondary text-secondary-foreground rounded-full font-medium
+                         transition-all duration-300 hover:bg-secondary/80 hover:scale-105"
+              >
+                Continue 💕
+              </button>
             </div>
-            
-            {/* Love Envelope */}
-            <LoveEnvelope />
           </div>
+        )}
+
+        {/* Confession Stage */}
+        {stage === 'confession' && (
+          <ConfessionSection onOpenClick={() => setStage('scanning')} />
+        )}
+
+        {/* Scanning Stage */}
+        {stage === 'scanning' && (
+          <ScanningAnimation onComplete={() => setStage('result')} />
+        )}
+
+        {/* Result Stage */}
+        {stage === 'result' && (
+          <ResultSticker onContinue={() => setStage('note')} />
+        )}
+
+        {/* Note Stage */}
+        {stage === 'note' && (
+          <NoteSection onContinue={() => setStage('game')} />
+        )}
+
+        {/* Game Stage */}
+        {stage === 'game' && (
+          <CatchHeartsGame />
         )}
       </div>
     </section>

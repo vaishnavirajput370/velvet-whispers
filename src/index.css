@@ -186,6 +186,14 @@
     animation: doodleBounce 2s ease-in-out infinite;
   }
 
+  .bird-idle {
+    animation: birdIdle 1.5s ease-in-out infinite;
+  }
+
+  .scanning-line {
+    animation: scanLine 2s ease-in-out infinite;
+  }
+
   .envelope-hover {
     transition: all 0.3s ease;
   }
@@ -249,5 +257,35 @@
   }
   50% {
     transform: translateY(-8px);
+  }
+}
+
+@keyframes birdIdle {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(2deg);
+  }
+}
+
+@keyframes scanLine {
+  0% {
+    top: 0%;
+    opacity: 1;
+  }
+  50% {
+    top: 100%;
+    opacity: 0.5;
+  }
+  100% {
+    top: 0%;
+    opacity: 1;
   }
 }
