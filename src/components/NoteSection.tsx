@@ -92,48 +92,50 @@ const NoteSection = ({ onContinue }: NoteSectionProps) => {
               Songs for Us 🎵
             </h3>
             
-            {/* Song 1 */}
+            {/* Song 1 - Tum Ho */}
             <div className="bg-white/70 rounded-xl p-4 space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-rose to-deep-rose 
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-rose to-deep-rose 
                                 flex items-center justify-center">
-                  <Music className="w-6 h-6 text-white" />
+                  <Music className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-medium text-foreground">Tum Ho Toh</h4>
+                  <h4 className="font-medium text-foreground">Tum Ho</h4>
                   <p className="text-sm text-muted-foreground">calm, steady feeling</p>
                 </div>
               </div>
-              <audio 
-                controls 
-                className="w-full h-10"
-                preload="none"
-              >
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
-                Your browser does not support audio.
-              </audio>
+              <iframe
+                style={{ borderRadius: '12px' }}
+                src="https://open.spotify.com/embed/track/7uNnlVit5qDvfOje0pqICF?utm_source=generator&theme=0"
+                width="100%"
+                height="152"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              />
             </div>
             
-            {/* Song 2 */}
+            {/* Song 2 - Dooron Dooron */}
             <div className="bg-white/70 rounded-xl p-4 space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-rose to-deep-rose 
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-rose to-deep-rose 
                                 flex items-center justify-center">
-                  <Music className="w-6 h-6 text-white" />
+                  <Music className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">
                   <h4 className="font-medium text-foreground">Dooron Dooron</h4>
                   <p className="text-sm text-muted-foreground">soft and easy mood</p>
                 </div>
               </div>
-              <audio 
-                controls 
-                className="w-full h-10"
-                preload="none"
-              >
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg" />
-                Your browser does not support audio.
-              </audio>
+              <iframe
+                style={{ borderRadius: '12px' }}
+                src="https://open.spotify.com/embed/track/0q5e5KtUOhYQujmhLP0pKd?utm_source=generator&theme=0"
+                width="100%"
+                height="152"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              />
             </div>
             
             <p className="text-center text-sm text-muted-foreground/70 pt-2">
