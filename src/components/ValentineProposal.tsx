@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from "react";
-import { Heart } from "lucide-react";
+import { Heart, ArrowLeft } from "lucide-react";
 import doodleProposal from "@/assets/doodle-proposal.png";
 import doodleCelebration from "@/assets/doodle-celebration.png";
 import ConfessionSection from "./ConfessionSection";
@@ -10,6 +10,17 @@ import CatchHeartsGame from "./CatchHeartsGame";
 import ThankYouScreen from "./ThankYouScreen";
 
 type Stage = 'proposal' | 'celebration' | 'confession' | 'scanning' | 'result' | 'note' | 'game' | 'thankyou';
+
+const stagePrev: Record<Stage, Stage | null> = {
+  proposal: null,
+  celebration: 'proposal',
+  confession: 'celebration',
+  scanning: 'confession',
+  result: 'scanning',
+  note: 'result',
+  game: 'note',
+  thankyou: 'game',
+};
 
 const ValentineProposal = () => {
   const [stage, setStage] = useState<Stage>('proposal');
@@ -41,6 +52,18 @@ const ValentineProposal = () => {
   return (
     <section className="py-8 px-6 relative min-h-[600px]">
       <div className="max-w-lg mx-auto text-center" ref={containerRef}>
+        {/* Back Button */}
+        {stagePrev[stage] && (
+          <button
+            onClick={() => setStage(stagePrev[stage]!)}
+            className="absolute top-4 left-4 z-20 flex items-center gap-1 px-3 py-2 rounded-full
+                       bg-secondary/80 text-secondary-foreground text-sm font-medium
+                       transition-all duration-200 hover:bg-secondary hover:scale-105"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back
+          </button>
+        )}
         {/* Proposal Stage */}
         {stage === 'proposal' && (
           <div className="fade-in space-y-6">
