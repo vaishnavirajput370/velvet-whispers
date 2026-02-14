@@ -7,8 +7,9 @@ import ScanningAnimation from "./ScanningAnimation";
 import ResultSticker from "./ResultSticker";
 import NoteSection from "./NoteSection";
 import CatchHeartsGame from "./CatchHeartsGame";
+import ThankYouScreen from "./ThankYouScreen";
 
-type Stage = 'proposal' | 'celebration' | 'confession' | 'scanning' | 'result' | 'note' | 'game';
+type Stage = 'proposal' | 'celebration' | 'confession' | 'scanning' | 'result' | 'note' | 'game' | 'thankyou';
 
 const ValentineProposal = () => {
   const [stage, setStage] = useState<Stage>('proposal');
@@ -145,7 +146,12 @@ const ValentineProposal = () => {
 
         {/* Game Stage */}
         {stage === 'game' && (
-          <CatchHeartsGame />
+          <CatchHeartsGame onComplete={() => setStage('thankyou')} />
+        )}
+
+        {/* Thank You Stage */}
+        {stage === 'thankyou' && (
+          <ThankYouScreen />
         )}
       </div>
     </section>
