@@ -19,6 +19,7 @@ const CatchHeartsGame = ({ onComplete }: { onComplete?: () => void }) => {
   const [timeLeft, setTimeLeft] = useState(30);
   const gameAreaRef = useRef<HTMLDivElement>(null);
   const heartIdRef = useRef(0);
+  const bucketXRef = useRef(50);
 
   const startGame = () => {
     setGameStarted(true);
@@ -34,7 +35,9 @@ const CatchHeartsGame = ({ onComplete }: { onComplete?: () => void }) => {
     if (!gameAreaRef.current || !gameStarted || gameOver) return;
     const rect = gameAreaRef.current.getBoundingClientRect();
     const x = ((clientX - rect.left) / rect.width) * 100;
-    setBucketX(Math.max(10, Math.min(90, x)));
+    const clamped = Math.max(10, Math.min(90, x));
+    bucketXRef.current = clamped;
+    setBucketX(clamped);
   }, [gameStarted, gameOver]);
 
   const handleMouseMove = (e: React.MouseEvent) => handleMove(e.clientX);
@@ -76,7 +79,7 @@ const CatchHeartsGame = ({ onComplete }: { onComplete?: () => void }) => {
           const newY = heart.y + heart.speed;
           
           // Check if caught (near bucket)
-          if (newY >= 85 && newY <= 95 && Math.abs(heart.x - bucketX) < 12) {
+          if (newY >= 85 && newY <= 95 && Math.abs(heart.x - bucketXRef.current) < 12) {
             caughtCount++;
           } else if (newY > 100) {
             missedCount++;
@@ -93,7 +96,7 @@ const CatchHeartsGame = ({ onComplete }: { onComplete?: () => void }) => {
     }, 50);
 
     return () => clearInterval(moveInterval);
-  }, [gameStarted, gameOver, bucketX]);
+  }, [gameStarted, gameOver]);
 
   // Timer
   useEffect(() => {
