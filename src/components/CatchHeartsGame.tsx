@@ -9,7 +9,7 @@ interface FallingHeart {
   size: number;
 }
 
-const CatchHeartsGame = () => {
+const CatchHeartsGame = ({ onComplete }: { onComplete?: () => void }) => {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [bucketX, setBucketX] = useState(50);
@@ -156,13 +156,24 @@ const CatchHeartsGame = () => {
             </div>
           </div>
           
-          <button
-            onClick={startGame}
-            className="px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium
-                       transition-all duration-300 hover:shadow-xl hover:shadow-rose/40 hover:scale-105"
-          >
-            Play Again 🔄
-          </button>
+          <div className="flex gap-4 justify-center">
+            <button
+              onClick={startGame}
+              className="px-8 py-3 bg-secondary text-secondary-foreground rounded-full font-medium
+                         transition-all duration-300 hover:bg-secondary/80 hover:scale-105"
+            >
+              Play Again 🔄
+            </button>
+            {onComplete && (
+              <button
+                onClick={onComplete}
+                className="px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium
+                           transition-all duration-300 hover:shadow-xl hover:shadow-rose/40 hover:scale-105"
+              >
+                Continue 💕
+              </button>
+            )}
+          </div>
         </div>
       ) : (
         /* Game Area */
